@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+             
+	<!-- DEV: borra y crea el esquema en cada arranque -->
+    <persistence-unit name="EvPrimerTrimestrePU-dev" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		
+        <properties>
+            <!-- JDBC MariaDB -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/registrodb"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <!-- Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+            <!-- Opción A: estándar Jakarta -->
+      		<property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+      		<!-- Opción B: estándar Hibernate -->
+            <!-- <property name="hibernate.hbm2ddl.auto" value="create-drop"/> -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+            <!-- (Opcional) convertir camelCase -> snake_case en BD -->
+     		<property name="hibernate.physical_naming_strategy"
+                value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/> 
+        </properties>
+    </persistence-unit>
+
+    <!-- PROD/NORMAL: mantiene datos (no borra) -->
+    <persistence-unit name="EvPrimerTrimestrePU" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		
+        <properties>
+            <!-- JDBC MariaDB -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/registrodb"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <!-- Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+            <!-- Opción A: estándar Hibernate -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/> 
+            <!-- Opción B: Alternativa más segura en producción: -->
+      		<!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
+      		<!-- Opción C estándar Jakarta -->
+      		<!-- <property name="jakarta.persistence.schema-generation.database.action" value="update"/> -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+            <!-- (Opcional) convertir camelCase -> snake_case en BD -->
+     		<property name="hibernate.physical_naming_strategy"
+                value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/> 
+        </properties>
+    </persistence-unit>
+    
+</persistence>
