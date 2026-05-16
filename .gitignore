@@ -1,0 +1,17 @@
+**/.idea/
+**/target/
+**/.mvn/
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.apt_generated
+**/.classpath
+**/.factorypath
+**/.project
+**/.settings
+**/.springBeans
+**/.sts4-cache
+**/build/
+**/.vscode/
+**/.kotlin
+**/.DS_Store
